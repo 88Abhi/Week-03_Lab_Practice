@@ -2,7 +2,6 @@ package com.inventorymanagementsystem;
 
 // InventoryManagementMain class to test the inventory management system
 class InventoryManagementMain {
-	// Main method to execute the program
 	public static void main(String[] args) {
 		// Creates an instance of the inventory management system
 		InventoryManagementSystem inventory = new InventoryManagementSystem();

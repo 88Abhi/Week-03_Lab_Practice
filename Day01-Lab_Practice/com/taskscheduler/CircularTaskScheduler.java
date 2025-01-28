@@ -21,7 +21,7 @@ class CircularTaskScheduler {
 		scheduler.displayAllTasks();
 
 		// Searches for tasks with priority 2
-		System.out.println("\nThe taks of priority 2 is: ");
+		System.out.println("\nThe tasks of priority 2 is: ");
 		scheduler.searchTaskByPriority(2);
 
 		// Views and moves to next task

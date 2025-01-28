@@ -31,7 +31,7 @@ class LibraryManagementSystem {
 		// Creates a new node with book details
 		BookNode newNode = new BookNode(title, author, genre, bookId, isAvailable);
 
-		// Checks if the list is empty, then sets head to the new node
+		// Checks if the list is empty
 		if (head == null) {
 			head = newNode;
 			return;

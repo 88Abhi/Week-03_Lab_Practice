@@ -21,11 +21,11 @@ class MovieManagementSystem {
 
 		// Check if the list is empty
 		if (head == null) {
-			// If empty, set head and tail to the new node
+			// set head and tail to the new node
 			head = tail = newNode;
 		}
 		else {
-			// Otherwise, update pointers to insert at the beginning
+			// update pointers to insert at the beginning
 			newNode.next = head;
 			head.prev = newNode;
 			head = newNode;
@@ -39,11 +39,11 @@ class MovieManagementSystem {
 
 		// Check if the list is empty
 		if (tail == null) {
-			// If empty, set head and tail to the new node
+			// set head and tail to the new node
 			head = tail = newNode;
 		}
 		else {
-			// Otherwise, update pointers to insert at the end
+			// update pointers to insert at the end
 			tail.next = newNode;
 			newNode.prev = tail;
 			tail = newNode;
@@ -91,7 +91,6 @@ class MovieManagementSystem {
 
 		// Traverse the list to find movies by the director
 		while (temp != null) {
-			// If director matches, print movie details
 			if (temp.director.equals(director)) {
 				System.out.println("Movie: " + temp.movieTitle + ", Year: " + temp.yearOfRelease + ", Rating: " + temp.rating);
 			}
@@ -106,7 +105,6 @@ class MovieManagementSystem {
 
 		// Traverse the list to find movies with the given rating
 		while (temp != null) {
-			// If rating matches, print movie details
 			if (temp.rating == rating) {
 				System.out.println("Movie: " + temp.movieTitle + ", Director: " + temp.director + ", Year: " + temp.yearOfRelease);
 			}
@@ -121,7 +119,6 @@ class MovieManagementSystem {
 
 		// Traverse the list to find the movie
 		while (temp != null) {
-			// If the movie title matches, update the rating
 			if (temp.movieTitle.equals(movieTitle)) {
 				temp.rating = newRating;
 				return;

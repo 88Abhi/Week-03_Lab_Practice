@@ -96,7 +96,6 @@ class TaskScheduler {
 
 		// Checks if the head node contains the task ID
 		if (head.taskId == taskId) {
-			// Checks if there is only one node in the list
 			if (head == tail) {
 				head = null;
 				tail = null;

@@ -22,7 +22,6 @@ class RoundRobinScheduler {
 		// Checks if the circular queue is empty
 		if (head == null) {
 			head = newNode;
-			// Points the next of the new node to itself to maintain circularity
 			head.next = head;
 			return;
 		}
@@ -64,8 +63,6 @@ class RoundRobinScheduler {
 			else {
 				// Updates the last node's next pointer to skip the head
 				temp.next = head.next;
-
-				// Moves head to the next node
 				head = head.next;
 			}
 			return;
@@ -95,44 +92,66 @@ class RoundRobinScheduler {
 			return;
 		}
 
-		// Initializes time counters
-		int totalProcesses = 0;
+		// Stores the initial number of processes
+		int totalProcesses = countProcesses();
 		int totalWaitingTime = 0;
 		int totalTurnaroundTime = 0;
+		int elapsedTime = 0;
 
 		// Keeps executing processes in a round-robin manner
 		ProcessNode current = head;
-		do {
+
+		// Continue processing while there are active processes
+		while (head != null) {
+			// Stores next process before modifying current
+			ProcessNode nextProcess = current.next;
+
 			// Checks if the process burst time is greater than the time quantum
 			if (current.burstTime > TIME_QUANTUM) {
 				System.out.println("Process " + current.processId + " executed for " + TIME_QUANTUM + " units.");
 
 				// Reduces burst time by time quantum
 				current.burstTime -= TIME_QUANTUM;
+				elapsedTime += TIME_QUANTUM;
 			}
 			else {
 				System.out.println("Process " + current.processId + " executed completely.");
 
-				// Adds waiting time calculation (turnaround time - burst time)
-				totalTurnaroundTime += current.burstTime;
+				// Calculates turnaround time for the completed process
+				totalTurnaroundTime += (elapsedTime + current.burstTime);
 
 				// Removes the process after execution
 				removeProcess(current.processId);
 			}
 
-			// Moves to the next process in the circular list
-			current = current.next;
-		}
-		while (head != null);
+			// If no processes remain, break the loop
+			if (head == null) {
+				break;
+			}
 
-		// Calculates average waiting and turnaround time
-		double avgWaitingTime = (double) totalWaitingTime / totalProcesses;
+			// Moves to the next process in the circular list
+			current = nextProcess;
+
+			// Ensures that `current` is not null
+			if (current == null) {
+				current = head;
+			}
+
+			// Displays the updated process queue after each round
+			System.out.println("\nUpdated Process Queue:");
+			displayProcesses();
+		}
+
+		// Calculates average waiting and turnaround time correctly
+		double avgWaitingTime = (double) (totalTurnaroundTime - elapsedTime) / totalProcesses;
 		double avgTurnaroundTime = (double) totalTurnaroundTime / totalProcesses;
 
 		// Displays the average times
+		System.out.println("\nFinal Statistics:");
 		System.out.println("Average Waiting Time: " + avgWaitingTime);
 		System.out.println("Average Turnaround Time: " + avgTurnaroundTime);
 	}
+
 
 	// Displays the list of processes in the circular queue
 	public void displayProcesses() {
@@ -151,5 +170,22 @@ class RoundRobinScheduler {
 			temp = temp.next;
 		}
 		while (temp != head);
+	}
+
+	//Create method to Count the total number of processes
+	private int countProcesses() {
+		if (head == null) {
+			return 0;
+		}
+
+		int count = 0;
+		ProcessNode current = head;
+		do {
+			count++;
+			current = current.next;
+		}
+		while (current != head);
+
+		return count;
 	}
 }

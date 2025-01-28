@@ -4,12 +4,14 @@ package com.inventorymanagementsystem;
 class InventoryNode {
 	// Stores the name of the item
 	String itemName;
-	// Stores the unique ID of the item
+
+	// Stores the unique ID and quantity of the item
 	int itemId;
-	// Stores the quantity of the item
 	int quantity;
+
 	// Stores the price of a single unit of the item
 	double price;
+
 	// Pointer to the next node in the linked list
 	InventoryNode next;
 

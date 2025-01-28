@@ -1,6 +1,5 @@
 package com.inventorymanagementsystem;
 
-
 // Class that manages the inventory using a singly linked list
 class InventoryManagementSystem {
 	// Head pointer to the linked list representing the inventory
@@ -15,8 +14,10 @@ class InventoryManagementSystem {
 	public void addAtBeginning(String itemName, int itemId, int quantity, double price) {
 		// Creates a new node with given item details
 		InventoryNode newNode = new InventoryNode(itemName, itemId, quantity, price);
+
 		// Sets the new node's next pointer to the current head
 		newNode.next = head;
+
 		// Updates the head to point to the new node
 		head = newNode;
 	}
@@ -25,6 +26,7 @@ class InventoryManagementSystem {
 	public void addAtEnd(String itemName, int itemId, int quantity, double price) {
 		// Creates a new node with given item details
 		InventoryNode newNode = new InventoryNode(itemName, itemId, quantity, price);
+
 		// Checks if the inventory list is empty
 		if (head == null) {
 			head = newNode;
@@ -32,10 +34,12 @@ class InventoryManagementSystem {
 		}
 		// Initializes a temporary pointer to traverse the list
 		InventoryNode temp = head;
+
 		// Traverses the list until the last node is reached
 		while (temp.next != null) {
 			temp = temp.next;
 		}
+
 		// Sets the last node's next pointer to the new node
 		temp.next = newNode;
 	}
@@ -44,6 +48,7 @@ class InventoryManagementSystem {
 	public void addAtPosition(String itemName, int itemId, int quantity, double price, int position) {
 		// Creates a new node with given item details
 		InventoryNode newNode = new InventoryNode(itemName, itemId, quantity, price);
+
 		// Checks if the position is at the beginning
 		if (position == 1) {
 			newNode.next = head;
@@ -52,14 +57,17 @@ class InventoryManagementSystem {
 		}
 		// Initializes a temporary pointer to traverse the list
 		InventoryNode temp = head;
+
 		// Moves to the node just before the desired position
 		for (int i = 1; temp != null && i < position - 1; i++) {
 			temp = temp.next;
 		}
+
 		// Checks if the position is valid
 		if (temp == null) {
 			return;
 		}
+
 		// Inserts the new node at the given position
 		newNode.next = temp.next;
 		temp.next = newNode;
@@ -67,7 +75,6 @@ class InventoryManagementSystem {
 
 	// Removes an item based on its unique item ID
 	public void removeItem(int itemId) {
-		// Checks if the inventory list is empty
 		if (head == null) {
 			return;
 		}
@@ -78,10 +85,12 @@ class InventoryManagementSystem {
 		}
 		// Initializes a temporary pointer to find the item
 		InventoryNode temp = head;
+
 		// Traverses the list to find the node before the target node
 		while (temp.next != null && temp.next.itemId != itemId) {
 			temp = temp.next;
 		}
+
 		// Checks if the target node is found and removes it
 		if (temp.next != null) {
 			temp.next = temp.next.next;
@@ -92,9 +101,9 @@ class InventoryManagementSystem {
 	public void updateQuantity(int itemId, int newQuantity) {
 		// Initializes a temporary pointer to traverse the list
 		InventoryNode temp = head;
+
 		// Traverses the list to find the target item
 		while (temp != null) {
-			// Checks if the current node matches the item ID
 			if (temp.itemId == itemId) {
 				temp.quantity = newQuantity;
 				return;
@@ -108,6 +117,7 @@ class InventoryManagementSystem {
 	public InventoryNode searchByItemId(int itemId) {
 		// Initializes a temporary pointer to traverse the list
 		InventoryNode temp = head;
+
 		// Traverses the list to find the item with the given ID
 		while (temp != null) {
 			if (temp.itemId == itemId) {
@@ -122,6 +132,7 @@ class InventoryManagementSystem {
 	public InventoryNode searchByItemName(String itemName) {
 		// Initializes a temporary pointer to traverse the list
 		InventoryNode temp = head;
+
 		// Traverses the list to find the item with the given name
 		while (temp != null) {
 			if (temp.itemName.equalsIgnoreCase(itemName)) {
@@ -136,8 +147,10 @@ class InventoryManagementSystem {
 	public double calculateTotalValue() {
 		// Initializes a total value accumulator
 		double totalValue = 0;
+
 		// Initializes a temporary pointer to traverse the list
 		InventoryNode temp = head;
+
 		// Traverses the list and accumulates the total inventory value
 		while (temp != null) {
 			totalValue += temp.quantity * temp.price;
@@ -150,6 +163,7 @@ class InventoryManagementSystem {
 	public void displayInventory() {
 		// Initializes a temporary pointer to traverse the list
 		InventoryNode temp = head;
+
 		// Traverses the list and prints item details
 		while (temp != null) {
 			System.out.println("Item ID: " + temp.itemId + ", Name: " + temp.itemName + ", Quantity: " + temp.quantity + ", Price: " + temp.price);

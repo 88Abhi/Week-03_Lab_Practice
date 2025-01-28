@@ -99,7 +99,6 @@ class StudentRecordList {
 
 		// Checks if the student exists
 		if (student != null) {
-			// Updates the student's grade
 			student.grade = newGrade;
 		}
 	}
